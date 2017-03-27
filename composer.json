@@ -1,0 +1,6 @@
+{
+  "require": {
+    "behat/mink-goutte-driver": "^1.2",
+    "behat/mink-extension": "^2.2"
+  }
+}
