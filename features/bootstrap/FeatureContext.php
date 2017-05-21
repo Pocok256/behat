@@ -22,22 +22,22 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
     {
     }
 
-    /**
-    Take screenshot,html dump, and some error message when step fails.
-    Works only with Selenium2Driver. *
-    @afterstep
-     */
     /** @AfterStep */
     public function afterStep(AfterStepScope $scope)
     {
         self::takeScreenshotAfterFailedStep($scope);
     }
+    /**
+    Take screenshot,html dump, and some error message when step fails.
+    Works only with Selenium2Driver. *
+    @afterstep
+     */
     public function takeScreenshotAfterFailedStep($scope) {
         if($scope->getTestResult()->getResultCode() == 99) {
             $current_scenario =  "dummy";
-            $file_and_path_html = 'tmp/' . time() . $current_scenario . '.html';
-            $file_and_path_png = 'tmp/' . time() . $current_scenario . '.jpg';
-            $file_and_path_txt = 'tmp/' . time() . $current_scenario . '.txt';
+            $file_and_path_html = 'error_log/' . time() . $current_scenario . '.html';
+            $file_and_path_png = 'error_log/' . time() . $current_scenario . '.jpg';
+            $file_and_path_txt = 'error_log/' . time() . $current_scenario . '.txt';
             $errorStep = $scope->getStep()->getText();
             file_put_contents(htmlspecialchars($file_and_path_txt), $errorStep);
             $html_data = $this->getSession()->getDriver()->getContent();

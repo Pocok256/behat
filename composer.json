@@ -4,6 +4,6 @@
     "behat/mink-extension": "^2.2",
     "behat/mink-selenium2-driver": "~1.1",
     "se/selenium-server-standalone":"3.4.0",
-    "enm1989/chromedriver": "2.29"
+    "pocok/selenium-drivers": "dev-master"
   }
 }
