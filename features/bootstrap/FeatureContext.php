@@ -1,8 +1,5 @@
 <?php
 
-use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 
@@ -15,6 +12,7 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
     private $filenameTXT;
     private $filenameJPG;
     private $errorLogPath;
+    public $gallery;
 
     /**
      * Initializes context.
@@ -29,6 +27,7 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
         $this->filenameTXT = time() . '.txt';
         $this->filenameJPG = time() . '.jpg';
         $this->errorLogPath = "error_log";
+        $this->gallery = new Gallery();
     }
 
     /** @AfterStep */
@@ -44,12 +43,14 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
      */
     public function makeLogAfterFailedStep($scope)
     {
+
         if ($scope->getTestResult()->getResultCode() == 99) {
             $featureName = $this->getFeatureName($scope);
             $this->setFeatureDIR($featureName);
             $this->makeTextErrorLog($scope, $featureName);
             $this->makeHtmlErrorLog($featureName);
             $this->makeImageErrorLog($featureName);
+            $this->makeIndexPHP($featureName);
         }
     }
 
@@ -96,6 +97,14 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
     {
         if (!is_dir($this->errorLogPath . '/' . $featureName)) {
             mkdir($this->errorLogPath . "/" . $featureName, "0777");
+        }
+    }
+
+    public function makeIndexPHP($featureName)
+    {
+        if (!file_exists($this->errorLogPath . '/' . $featureName. '/index.php')) {
+        file_put_contents(htmlspecialchars($this->errorLogPath . "/" . $featureName . '/index.php'),
+          $this->gallery->getIndexPHPContent());
         }
     }
 }
