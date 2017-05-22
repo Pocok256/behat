@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>UberGallery</title>
+    <title>Behat Error Logs</title>
     <link rel="shortcut icon" href="<?php echo THEMEPATH; ?>/images/favicon.png" />
 
     <link rel="stylesheet" type="text/css" href="<?php echo THEMEPATH; ?>/rebase-min.css" />
@@ -18,7 +18,7 @@
 
 <!-- Start UberGallery v<?php echo UberGallery::VERSION; ?> - Copyright (c) <?php echo date('Y'); ?> Chris Kankiewicz (http://www.ChrisKankiewicz.com) -->
 <div id="galleryWrapper">
-    <h1>UberGallery</h1>
+    <h1>Behat Error Logs</h1>
     <div class="line"></div>
 
     <?php if($gallery->getSystemMessages()): ?>
@@ -35,7 +35,11 @@
         <?php if (!empty($galleryArray) && $galleryArray['stats']['total_images'] > 0): ?>
             <ul id="galleryList" class="clearfix">
                 <?php foreach ($galleryArray['images'] as $image): ?>
-                    <li><a href="<?php echo html_entity_decode($image['file_path']); ?>" title="<?php echo date('Y-m-d H:i:s',$image['file_title']); ?>" rel="colorbox"><img src="<?php echo $image['thumb_path']; ?>" alt="<?php echo $image['file_title']; ?>"/></a></li>
+                    <li><a href="<?php echo html_entity_decode($image['file_path']); ?>" title="<?php echo date('Y-m-d H:i:s',$image['file_title']); ?>" rel="colorbox"><img src="<?php echo $image['thumb_path']; ?>" alt="<?php echo $image['file_title']; ?>"/></a>
+                        <a href='<?php echo $image['file_title']; ?>.html'>Html Source</a>
+                        <a href='<?php echo $image['file_title']; ?>.txt'>Fail step</a>
+
+                    </li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>

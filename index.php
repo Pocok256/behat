@@ -1,25 +1,9 @@
 <?php
+$dir="error_log";
+$files =  glob($dir . '/*' , GLOB_ONLYDIR);
 
-    // Include the UberGallery class
-    include('resources/UberGallery.php');
+foreach ($files as $file) {
+$scenario = explode("/",$file,2);
 
-    // Initialize the UberGallery object
-    $gallery = new UberGallery();
-
-    // Initialize the gallery array
-    $galleryArray = $gallery->readImageDirectory('error_log/Teszt');
-
-    // Define theme path
-    if (!defined('THEMEPATH')) {
-        define('THEMEPATH', $gallery->getThemePath());
-    }
-
-    // Set path to theme index
-    $themeIndex = $gallery->getThemePath(true) . '/index.php';
-
-    // Initialize the theme
-    if (file_exists($themeIndex)) {
-        include($themeIndex);
-    } else {
-        die('ERROR: Failed to initialize theme');
-    }
+    echo "<a href='".$file."'>".$scenario[1]."</a>";
+}

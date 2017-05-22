@@ -193,7 +193,7 @@ class UberGallery {
             foreach ($dirArray as $key => $image) {
 
                 // Get files relative path
-                $relativePath = $this->_rImgDir . '/' . $key;
+                $relativePath = $key;
 
                 $galleryArray['images'][htmlentities(pathinfo($image['real_path'], PATHINFO_BASENAME))] = array(
                     'file_title'   => str_replace('_', ' ', pathinfo($image['real_path'], PATHINFO_FILENAME)),
@@ -488,7 +488,7 @@ class UberGallery {
     public function setRelativeImageDirectory($directory) {
 
         // Set real path to $directory
-        $this->_imgDir  = realpath($directory);
+        $this->_imgDir  = "";
 
         // Set relative path to $directory
         $this->_rImgDir = $directory;
@@ -568,12 +568,12 @@ class UberGallery {
             $dirArray = array();
 
             // Loop through directory and add information to array
-            if ($handle = opendir($directory)) {
+            if ($handle = opendir("./")) {
                 while (false !== ($file = readdir($handle))) {
                     if ($file != "." && $file != "..") {
 
                         // Get files real path
-                        $realPath = realpath($directory . '/' . $file);
+                        $realPath = $file;
 
                         // If file is an image, add info to array
                         if ($this->_isImage($realPath)) {
