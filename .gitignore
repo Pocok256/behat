@@ -2,4 +2,4 @@
 /vendor
 composer.lock
 /error_log/*
-/resources/*
+/resources/cache/*
