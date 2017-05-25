@@ -1,0 +1,1 @@
+java -Dwebdriver.chrome.driver=%~dp0vendor\pocok\selenium-drivers\geckodriver.exe -jar %~dp0vendor\se\selenium-server-standalone\bin\selenium-server-standalone.jar
